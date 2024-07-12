@@ -13,7 +13,7 @@ namespace JNC.Function
 {
     public static class HttpTrigger2
     {
-        [FunctionName("HttpTrigger2")]
+        [FunctionName("DotaListFunc")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
@@ -36,7 +36,7 @@ namespace JNC.Function
 
             var result = JsonConvert.SerializeObject(heroes);
 
-            return new OkObjectResult(result);
+            return await Task.FromResult(new OkObjectResult(result));
         }
     }
 }
