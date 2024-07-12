@@ -1,0 +1,29 @@
+name: Azure Function CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0"
+
+      - name: Build Azure Func
+        run: |
+          cd .
+          dotnet build --configuration Release
+      
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: jnc-azure-func
+          path: /bin/Release/net6.0/publish
