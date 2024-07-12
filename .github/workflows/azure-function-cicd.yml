@@ -27,3 +27,10 @@ jobs:
         with:
           name: jnc-azure-func
           path: /bin/Release/net6.0/publish
+      
+      - name: Deploy to Azure Function App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: jnc-azure-func
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
+          package: /bin/Release/net6.0/publish
